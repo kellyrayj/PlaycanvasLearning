@@ -469,21 +469,20 @@
       border-color: #bae6fd;
     }
 
-    /* Right-Edge Sidebar Rail (keeps the entire bottom-right clear for thumb camera look!) */
+    /* Right-Edge Sidebar Rail (centered on the right; keeps bottom-right clear for camera look) */
     #mobile-right-rail {
       position: absolute;
-      top: calc(max(12px, env(safe-area-inset-top)) + 46px);
-      right: max(10px, env(safe-area-inset-right));
-      display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-      gap: 8px;
+      inset: 0;
       pointer-events: none;
       touch-action: none;
     }
 
-    /* Dedicated Jump & Crouch stacked vertically in the right sidebar */
+    /* Dedicated Jump & Crouch anchored at the vertical center of the right edge */
     #mobile-action-cluster {
+      position: absolute;
+      top: 50%;
+      right: max(10px, env(safe-area-inset-right));
+      transform: translateY(-50%);
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -540,10 +539,13 @@
       pointer-events: none;
     }
 
-    /* Contextual Interaction Buttons in the Right Sidebar */
+    /* Contextual Interaction Buttons in the Right Sidebar (grow upward just above Jump) */
     #mobile-context-cluster {
+      position: absolute;
+      bottom: calc(50% + 62px);
+      right: max(10px, env(safe-area-inset-right));
       display: flex;
-      flex-direction: column;
+      flex-direction: column-reverse;
       align-items: flex-end;
       gap: 6px;
       pointer-events: none;
@@ -551,7 +553,7 @@
     }
     #mobile-context-main {
       display: flex;
-      flex-direction: column;
+      flex-direction: column-reverse;
       align-items: flex-end;
       gap: 6px;
     }
