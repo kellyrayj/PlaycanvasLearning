@@ -469,14 +469,25 @@
       border-color: #bae6fd;
     }
 
-    /* Right Dedicated Jump & Crouch Cluster */
-    #mobile-action-cluster {
+    /* Right-Edge Sidebar Rail (keeps the entire bottom-right clear for thumb camera look!) */
+    #mobile-right-rail {
       position: absolute;
-      bottom: max(22px, env(safe-area-inset-bottom));
-      right: max(22px, env(safe-area-inset-right));
+      top: calc(max(12px, env(safe-area-inset-top)) + 46px);
+      right: max(10px, env(safe-area-inset-right));
       display: flex;
+      flex-direction: column;
       align-items: flex-end;
-      gap: 12px;
+      gap: 8px;
+      pointer-events: none;
+      touch-action: none;
+    }
+
+    /* Dedicated Jump & Crouch stacked vertically in the right sidebar */
+    #mobile-action-cluster {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
       pointer-events: auto;
       touch-action: none;
     }
@@ -485,11 +496,11 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      border-radius: 50%;
+      border-radius: 16px;
       background: rgba(17, 24, 39, 0.72);
-      border: 2px solid rgba(255, 255, 255, 0.28);
+      border: 1.5px solid rgba(255, 255, 255, 0.28);
       color: #f9fafb;
-      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45);
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.45);
       backdrop-filter: blur(5px);
       cursor: pointer;
       touch-action: none;
@@ -505,60 +516,59 @@
     .action-btn.toggled {
       background: rgba(217, 119, 6, 0.65);
       border-color: rgba(251, 191, 36, 0.95);
-      box-shadow: 0 0 16px rgba(251, 191, 36, 0.45);
+      box-shadow: 0 0 14px rgba(251, 191, 36, 0.45);
     }
     .action-jump {
-      width: 78px;
-      height: 78px;
+      width: 58px;
+      height: 54px;
     }
     .action-crouch {
       width: 58px;
-      height: 58px;
+      height: 44px;
     }
     .action-icon {
-      font-size: 18px;
+      font-size: 15px;
       line-height: 1;
       font-weight: 800;
-      margin-bottom: 2px;
+      margin-bottom: 1px;
       pointer-events: none;
     }
     .action-label {
-      font-size: 10px;
+      font-size: 9px;
       font-weight: 800;
-      letter-spacing: 0.06em;
+      letter-spacing: 0.05em;
       pointer-events: none;
     }
 
-    /* Right Contextual Interaction Cluster (above Jump/Crouch) */
+    /* Contextual Interaction Buttons in the Right Sidebar */
     #mobile-context-cluster {
-      position: absolute;
-      bottom: calc(max(22px, env(safe-area-inset-bottom)) + 94px);
-      right: max(22px, env(safe-area-inset-right));
       display: flex;
       flex-direction: column;
       align-items: flex-end;
-      gap: 10px;
+      gap: 6px;
       pointer-events: none;
       touch-action: none;
     }
     #mobile-context-main {
       display: flex;
-      align-items: center;
-      gap: 10px;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 6px;
     }
     .ctx-btn {
       display: none;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      min-width: 72px;
-      height: 68px;
-      padding: 0 14px;
-      border-radius: 34px;
+      min-width: 58px;
+      max-width: 96px;
+      min-height: 50px;
+      padding: 6px 10px;
+      border-radius: 14px;
       background: rgba(17, 24, 39, 0.85);
-      border: 2px solid rgba(255, 255, 255, 0.3);
+      border: 1.5px solid rgba(255, 255, 255, 0.3);
       color: #fff;
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
       backdrop-filter: blur(6px);
       cursor: pointer;
       pointer-events: auto;
@@ -580,19 +590,19 @@
     .ctx-btn.theme-use {
       background: rgba(146, 64, 14, 0.82);
       border-color: #fbbf24;
-      box-shadow: 0 0 18px rgba(251, 191, 36, 0.45);
+      box-shadow: 0 0 16px rgba(251, 191, 36, 0.45);
       color: #fef3c7;
     }
     .ctx-btn.theme-grab {
       background: rgba(30, 58, 138, 0.82);
       border-color: #38bdf8;
-      box-shadow: 0 0 18px rgba(56, 189, 248, 0.45);
+      box-shadow: 0 0 16px rgba(56, 189, 248, 0.45);
       color: #e0f2fe;
     }
     .ctx-btn.theme-place {
       background: rgba(6, 95, 70, 0.88);
       border-color: #34d399;
-      box-shadow: 0 0 22px rgba(52, 211, 153, 0.65);
+      box-shadow: 0 0 18px rgba(52, 211, 153, 0.65);
       color: #d1fae5;
     }
     .ctx-btn.theme-drop {
@@ -603,25 +613,25 @@
     .ctx-btn.theme-throw {
       background: rgba(124, 45, 18, 0.82);
       border-color: #fb923c;
-      box-shadow: 0 0 16px rgba(251, 146, 60, 0.4);
+      box-shadow: 0 0 14px rgba(251, 146, 60, 0.4);
       color: #ffedd5;
     }
     .ctx-icon {
-      font-size: 17px;
+      font-size: 14px;
       line-height: 1.1;
       pointer-events: none;
     }
     .ctx-label {
-      font-size: 11px;
+      font-size: 10px;
       font-weight: 800;
-      letter-spacing: 0.06em;
+      letter-spacing: 0.05em;
       pointer-events: none;
     }
     .ctx-sub {
-      font-size: 9.5px;
+      font-size: 8.5px;
       font-weight: 600;
       opacity: 0.88;
-      max-width: 110px;
+      max-width: 82px;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
@@ -631,11 +641,12 @@
       display: none;
     }
 
-    /* Held-prop auxiliary tools (Rotate pad + Pull/Push distance) */
+    /* Held-prop auxiliary tools stacked in the sidebar */
     #mobile-held-tools {
       display: none;
-      align-items: center;
-      gap: 6px;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 5px;
       pointer-events: auto;
     }
     #mobile-held-tools.visible {
@@ -645,9 +656,9 @@
       background: rgba(17, 24, 39, 0.82);
       color: #e5e7eb;
       border: 1.5px solid rgba(255, 255, 255, 0.26);
-      border-radius: 999px;
-      padding: 7px 12px;
-      font-size: 11px;
+      border-radius: 10px;
+      padding: 6px 10px;
+      font-size: 10px;
       font-weight: 700;
       cursor: pointer;
       backdrop-filter: blur(5px);
@@ -664,29 +675,18 @@
 
     @media (max-width: 520px) {
       #mobile-joystick-zone {
-        width: 148px;
-        height: 148px;
+        width: 144px;
+        height: 144px;
       }
       #joystick-base {
-        width: 110px;
-        height: 110px;
+        width: 106px;
+        height: 106px;
       }
       #joystick-stick {
-        width: 46px;
-        height: 46px;
-        margin-top: -23px;
-        margin-left: -23px;
-      }
-      .action-jump {
-        width: 68px;
-        height: 68px;
-      }
-      .action-crouch {
-        width: 52px;
-        height: 52px;
-      }
-      #mobile-context-cluster {
-        bottom: calc(max(18px, env(safe-area-inset-bottom)) + 82px);
+        width: 44px;
+        height: 44px;
+        margin-top: -22px;
+        margin-left: -22px;
       }
       .modal-card {
         width: calc(100vw - 48px);
@@ -741,36 +741,37 @@
       </div>
     </div>
 
-    <!-- Right Contextual Interaction Buttons (Grab / Use / Drop / Place / Throw / Punt / Rotate) -->
-    <div id="mobile-context-cluster">
-      <div id="mobile-held-tools">
-        <button id="btn-dist-near" class="ctx-mini-btn" type="button">− Pull</button>
-        <button id="btn-dist-far" class="ctx-mini-btn" type="button">+ Push</button>
-        <button id="btn-context-rotate" class="ctx-mini-btn" type="button">🔄 Rotate</button>
-      </div>
-      <div id="mobile-context-main">
-        <button id="btn-context-secondary" class="ctx-btn" type="button">
-          <span class="ctx-icon" id="ctx-sec-icon">💥</span>
-          <span class="ctx-label" id="ctx-sec-label">PUNT</span>
+    <!-- Right-Edge Sidebar Rail (Jump, Crouch, and Context Interact above the bottom-right camera look area) -->
+    <div id="mobile-right-rail">
+      <div id="mobile-action-cluster">
+        <button id="btn-mobile-jump" class="action-btn action-jump" type="button">
+          <span class="action-icon">⌃</span>
+          <span class="action-label" id="lbl-mobile-jump">JUMP</span>
         </button>
-        <button id="btn-context-primary" class="ctx-btn" type="button">
-          <span class="ctx-icon" id="ctx-pri-icon">✋</span>
-          <span class="ctx-label" id="ctx-pri-label">GRAB</span>
-          <span class="ctx-sub" id="ctx-pri-sub"></span>
+        <button id="btn-mobile-crouch" class="action-btn action-crouch" type="button">
+          <span class="action-icon">⌄</span>
+          <span class="action-label" id="lbl-mobile-crouch">CROUCH</span>
         </button>
       </div>
-    </div>
 
-    <!-- Right Dedicated Movement Cluster (Crouch / Fly-Down + Jump / Fly-Up) -->
-    <div id="mobile-action-cluster">
-      <button id="btn-mobile-crouch" class="action-btn action-crouch" type="button">
-        <span class="action-icon">⌄</span>
-        <span class="action-label" id="lbl-mobile-crouch">CROUCH</span>
-      </button>
-      <button id="btn-mobile-jump" class="action-btn action-jump" type="button">
-        <span class="action-icon">⌃</span>
-        <span class="action-label" id="lbl-mobile-jump">JUMP</span>
-      </button>
+      <div id="mobile-context-cluster">
+        <div id="mobile-context-main">
+          <button id="btn-context-primary" class="ctx-btn" type="button">
+            <span class="ctx-icon" id="ctx-pri-icon">✋</span>
+            <span class="ctx-label" id="ctx-pri-label">GRAB</span>
+            <span class="ctx-sub" id="ctx-pri-sub"></span>
+          </button>
+          <button id="btn-context-secondary" class="ctx-btn" type="button">
+            <span class="ctx-icon" id="ctx-sec-icon">💥</span>
+            <span class="ctx-label" id="ctx-sec-label">PUNT</span>
+          </button>
+        </div>
+        <div id="mobile-held-tools">
+          <button id="btn-context-rotate" class="ctx-mini-btn" type="button">🔄 Rotate</button>
+          <button id="btn-dist-far" class="ctx-mini-btn" type="button">+ Push</button>
+          <button id="btn-dist-near" class="ctx-mini-btn" type="button">− Pull</button>
+        </div>
+      </div>
     </div>
   </div>
 
