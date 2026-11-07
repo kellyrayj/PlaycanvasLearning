@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PCFX Poof Lab</title>
+  <link rel="icon" href="data:," />
+  <style>
+    html, body { margin: 0; padding: 0; background: #101216; color: #e5e7eb; font-family: system-ui, -apple-system, sans-serif; }
+    #application-canvas { display: block; width: 960px; height: 540px; }
+    #panel { padding: 10px 14px; font-size: 12.5px; line-height: 1.5; max-width: 932px; }
+    #panel a { color: #93c5fd; margin-right: 10px; }
+    #panel code, #report { font-family: ui-monospace, SFMono-Regular, Consolas, monospace; }
+    #report { white-space: pre-wrap; font-size: 11.5px; color: #6ee7b7; background: #0b0d10; padding: 8px; border-radius: 6px; max-height: 320px; overflow: auto; }
+    #error-overlay { display: none; color: #fecaca; background: #7f1d1d; padding: 8px; white-space: pre-wrap; font-family: ui-monospace, monospace; }
+    button { background: #1f2937; color: #e5e7eb; border: 1px solid #374151; border-radius: 4px; padding: 3px 10px; cursor: pointer; }
+  </style>
+  <script>
+    window.__pcfxErrors = [];
+    window.addEventListener('error', (e) => {
+      window.__pcfxErrors.push(String(e.message));
+      const box = document.getElementById('error-overlay');
+      if (box) { box.style.display = 'block'; box.textContent += `[ERROR] ${e.message}\n`; }
+    });
+    window.addEventListener('unhandledrejection', (e) => {
+      window.__pcfxErrors.push(String(e.reason && e.reason.stack ? e.reason.stack : e.reason));
+      const box = document.getElementById('error-overlay');
+      if (box) { box.style.display = 'block'; box.textContent += `[PROMISE ERROR] ${e.reason}\n`; }
+    });
+  </script>
+  <script type="module" crossorigin src="./assets/pcfxPoof-zOH3TY36.js"></script>
+  <link rel="modulepreload" crossorigin href="./assets/install-Dzl-iPxZ.js">
+</head>
+<body>
+  <canvas id="application-canvas" width="960" height="540"></canvas>
+  <div id="panel">
+    <p>
+      <button id="fire">Fire (Space)</button>
+      <a href="?">live</a>
+      <a href="?warmup=0">live, no warmup</a>
+      <a href="pcfx-runtime.html">runtime lab</a>
+      <a href="pcfx-lab.html">module lab</a>
+    </p>
+    <p>Unity <code>1FX_Poof_White</code> converted by hand: <code>/fx/poof/poof-white.json</code>, mesh particles from <code>dustpoof.glb</code>, the <code>dissolve</code> module with <code>dustpuff_dissolve.png</code>, a random 8&ndash;12 particle burst and random lifetimes of 0.2&ndash;0.48 s. Fires every 1.5 s.</p>
+    <div id="error-overlay"></div>
+    <div id="report">Starting...</div>
+  </div>
+</body>
+</html>

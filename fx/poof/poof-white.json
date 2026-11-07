@@ -1,0 +1,56 @@
+{
+  "pcfx": 1,
+  "id": "poof-white",
+  "name": "Poof (White)",
+  "timing": { "duration": 1, "loop": false },
+  "systems": [
+    {
+      "name": "PFX_Poof",
+      "particlesystem": {
+        "numParticles": 12,
+        "lifetime": 0.48,
+        "rate": 0,
+        "rate2": 0,
+        "loop": false,
+        "localSpace": false,
+        "emitterShape": 0,
+        "emitterExtents": [0.158, 0.158, 0.158],
+        "startAngle": 0,
+        "startAngle2": 360,
+        "radialSpeedGraph": { "type": 0, "keys": [0, 0.105, 0.1, 0.097, 0.2, 0.091, 0.35, 0.084, 0.5, 0.08, 0.75, 0.075, 1, 0.073] },
+        "radialSpeedGraph2": { "type": 0, "keys": [0, 0.455, 0.1, 0.368, 0.2, 0.3, 0.35, 0.226, 0.5, 0.176, 0.75, 0.126, 1, 0.099] },
+        "scaleGraph": { "type": 0, "keys": [0, 0, 0.125, 19.711, 0.25, 35.388, 0.375, 46.963, 0.5, 54.367, 0.625, 57.532, 0.75, 56.387, 0.875, 50.865, 1, 40.896] },
+        "scaleGraph2": { "type": 0, "keys": [0, 0, 0.125, 16.365, 0.25, 28.751, 0.375, 37.305, 0.5, 42.169, 0.625, 43.488, 0.75, 41.406, 0.875, 36.068, 1, 27.618] },
+        "alphaGraph": { "type": 0, "keys": [0, 1, 1, 0] },
+        "colorGraph": { "type": 0, "keys": [[0, 1], [0, 1], [0, 1]] },
+        "blendType": 3,
+        "depthWrite": true,
+        "lighting": false,
+        "mesh": { "url": "/fx/poof/dustpoof.glb" }
+      },
+      "modules": {
+        "random-lifetime": { "min": 0.2, "max": 0.48 },
+        "dissolve": {
+          "texture": { "url": "/fx/poof/dustpuff_dissolve.png", "srgb": true, "address": "clamp" },
+          "edge": -0.01,
+          "cutoff": 0.1,
+          "backfaceDim": 0.5
+        }
+      },
+      "emission": { "continuous": false, "bursts": [{ "time": 0, "count": 8, "countMax": 12 }] }
+    }
+  ],
+  "approximations": [
+    { "system": "PFX_Poof", "module": "unity-scaling-mode", "note": "Scaling mode Hierarchy (parent scale 0.7) baked into sizes, speeds and the box size; only exact at that scale" },
+    { "system": "PFX_Poof", "module": "unity-limit-velocity", "note": "Limit Velocity (magnitude 0.1, dampen 0.1) approximated by radialSpeedGraph/radialSpeedGraph2 decay curves toward ~0.07-0.1 m/s (Unity's dampen is frame-rate dependent)" },
+    { "system": "PFX_Poof", "module": "unity-start-size", "note": "Start size (random 16-20) x size over lifetime (random between two curves x4) folded into scaleGraph/scaleGraph2 at the mean start size 18.02; Unity rolls two independent randoms, stock rolls one; curves sampled to 9 linear keys" },
+    { "system": "PFX_Poof", "module": "unity-start-rotation-3d", "note": "Start rotation X = 180 baked into the GLB; Z random 0-360 via startAngle/startAngle2, but stock mesh particles rotate around Z and X by the same angle" },
+    { "system": "PFX_Poof", "module": "unity-shape", "note": "Box shape with Spherical Direction Amount 1 approximated by stock box + outward radial speed from the emitter center" },
+    { "system": "PFX_Poof", "module": "unity-render-alignment", "note": "Mesh render mode alignment Local approximated (stock mesh particles use the emitter orientation)" },
+    { "system": "PFX_Poof", "module": "unity-random-lifetime", "note": "Lifetime random 0.2-0.48 via random-lifetime; a particle keeps its rolled lifetime for the whole effect (no re-roll)" },
+    { "system": "PFX_Poof", "module": "unity-dissolve", "note": "Dissolve threshold uses the stock particle alpha (alpha over life); alpha multipliers from other pcfx modules are ignored by the clip" },
+    { "system": "PFX_Poof", "module": "unity-custom-data", "note": "Rim / rim color (custom vertex stream Custom1XYZW, custom-data module off) dropped; no visible effect in Unity either" },
+    { "system": "PFX_Poof", "module": "unity-renderer", "note": "Culling mode (always simulate), max particle size (billboards only) and stencil settings dropped; they do not apply" },
+    { "system": "PFX_Poof", "module": "unity-audio", "note": "Poof_Subtle_01.wav one-shot audio dropped (pcfx has no audio)" }
+  ]
+}
